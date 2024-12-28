@@ -15,6 +15,8 @@ import (
 	"github.com/shufo/gh-issue-stats/pkg/types"
 )
 
+var header = []string{"Label", "Open", "Closed", "Total", "Open %", "Average Time to close (days)", "Median Time to close (days)"}
+
 func PrintStatistics(stats types.Statistics) {
 	t := table.NewWriter()
 	t.SetOutputMirror(os.Stdout)
@@ -27,7 +29,7 @@ func PrintStatistics(stats types.Statistics) {
 	t.Style().Options.SeparateRows = false
 
 	// Set header
-	t.AppendHeader(table.Row{"Label", "Open", "Closed", "Total", "Open %", "Average Time to close (days)", "Median Time to close (days)"})
+	t.AppendHeader(table.Row{header})
 
 	// Add label statistics rows
 	for _, stat := range stats.LabelStats {
@@ -99,7 +101,6 @@ func WriteDelimitedOutput(stats types.Statistics, delimiter rune) error {
 	writer.Comma = delimiter
 
 	// Write header
-	header := []string{"Label", "Open", "Closed", "Total"}
 	if err := writer.Write(header); err != nil {
 		return fmt.Errorf("error writing header: %v", err)
 	}
