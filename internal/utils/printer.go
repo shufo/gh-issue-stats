@@ -112,6 +112,9 @@ func WriteDelimitedOutput(stats types.Statistics, delimiter rune) error {
 			strconv.Itoa(stat.Open),
 			strconv.Itoa(stat.Closed),
 			strconv.Itoa(stat.Total),
+			fmt.Sprintf("%.2f", stat.OpenPercentage),
+			fmt.Sprintf("%.0f", math.Round((stat.AvgCloseTime/(24*60*60))*100/100)),
+			fmt.Sprintf("%.0f", stat.MedianCloseTime),
 		}
 		if err := writer.Write(row); err != nil {
 			return fmt.Errorf("error writing row: %v", err)
@@ -124,6 +127,9 @@ func WriteDelimitedOutput(stats types.Statistics, delimiter rune) error {
 		strconv.Itoa(stats.OverallStats.Open),
 		strconv.Itoa(stats.OverallStats.Closed),
 		strconv.Itoa(stats.OverallStats.Total),
+		fmt.Sprintf("%.2f%%", stats.OverallStats.OpenPercentage),
+		fmt.Sprintf("%.0f", math.Round((stats.OverallStats.AvgCloseTime/(24*60*60))*100/100)),
+		fmt.Sprintf("%.0f", stats.OverallStats.MedianCloseTime),
 	}
 	if err := writer.Write(totalRow); err != nil {
 		return fmt.Errorf("error writing total row: %v", err)
