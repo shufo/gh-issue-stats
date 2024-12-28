@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/shufo/gh-issue-stats/compare/v0.2.0...v0.2.1) (2024-12-28)
+
+
+### Miscellaneous
+
+* release 0.2.1 ([4387a9b](https://github.com/shufo/gh-issue-stats/commit/4387a9bdef7b4612939a319d0c2d926da05cbf11))
+
 ## [0.2.0](https://github.com/shufo/gh-issue-stats/compare/v0.1.0...v0.2.0) (2024-12-28)
 
 
