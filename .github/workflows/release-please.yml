@@ -30,7 +30,7 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
         uses: goreleaser/goreleaser-action@v6
         with:
-          version: latest
+          version: '~> v2'
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
