@@ -21,16 +21,9 @@ jobs:
       - name: Unshallow
         if: ${{ steps.release.outputs.release_created }}
         run: git fetch --prune --unshallow
-      - name: Set up Go
-        if: ${{ steps.release.outputs.release_created }}
-        uses: actions/setup-go@v5
-        with:
-          go-version: 1.23.x
       - name: Run GoReleaser
         if: ${{ steps.release.outputs.release_created }}
-        uses: goreleaser/goreleaser-action@v6
+        uses: cli/gh-extension-precompile@v2
         with:
-          version: '~> v2'
-          args: release --clean
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          release_tag: ${{ steps.release.outputs.tag_name }}
+          go_version_file: go.mod
