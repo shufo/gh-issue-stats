@@ -2,3 +2,5 @@
 /gh-issue-stats.exe
 issues.json
 stats.json
+
+dist/
