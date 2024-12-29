@@ -21,9 +21,7 @@ func calculateMedian(values []float64) float64 {
 	return values[middle]
 }
 
-// calculateStatistics processes issues and generates statistics
 func CalculateStatistics(issues []types.Issue) types.Statistics {
-	// Initialize labelStats as empty slice instead of nil
 	labelStatsSlice := make([]types.LabelStat, 0)
 	labelStats := make(map[string]*types.LabelStat)
 	overallStats := types.OverallStats{}
@@ -34,7 +32,6 @@ func CalculateStatistics(issues []types.Issue) types.Statistics {
 
 	var totalCloseTime float64
 	var allCloseTimes []float64
-
 	var closedIssuesCount int
 
 	for _, issue := range issues {
@@ -83,18 +80,18 @@ func CalculateStatistics(issues []types.Issue) types.Statistics {
 				closeTime := issue.ClosedAt.Sub(*issue.CreatedAt)
 				if closeTime >= 0 {
 					closeTimeDays := closeTime.Hours() / 24 // Convert to days
-					totalCloseTime += closeTime.Seconds()
+					totalCloseTime += closeTimeDays         // Store in days
 					allCloseTimes = append(allCloseTimes, closeTimeDays)
 					closedIssuesCount++
 					if len(issue.Labels) == 0 {
-						labelAvgTimeToClose[types.UnlabeledLabel] += closeTime.Seconds()
+						labelAvgTimeToClose[types.UnlabeledLabel] += closeTimeDays
 						labelCloseTimes[types.UnlabeledLabel] = append(
 							labelCloseTimes[types.UnlabeledLabel],
 							closeTimeDays,
 						)
 					} else {
 						for _, label := range issue.Labels {
-							labelAvgTimeToClose[label.Name] += closeTime.Seconds()
+							labelAvgTimeToClose[label.Name] += closeTimeDays
 							labelCloseTimes[label.Name] = append(
 								labelCloseTimes[label.Name],
 								closeTimeDays,
@@ -114,7 +111,7 @@ func CalculateStatistics(issues []types.Issue) types.Statistics {
 		return labelStatsSlice[i].Total > labelStatsSlice[j].Total
 	})
 
-	// Calculate the average close time for each label
+	// Calculate the average close time for each label (already in days)
 	for i, stat := range labelStatsSlice {
 		totalLabelCloseTime := labelAvgTimeToClose[stat.Name]
 
@@ -130,7 +127,7 @@ func CalculateStatistics(issues []types.Issue) types.Statistics {
 		labelStatsSlice[i] = stat
 	}
 
-	// Calculate the overall average close time
+	// Calculate the overall average close time (already in days)
 	var overallAvgTimeToClose, overallMedianTimeToClose float64
 	if closedIssuesCount > 0 {
 		overallAvgTimeToClose = totalCloseTime / float64(closedIssuesCount)

@@ -4,7 +4,6 @@ import (
 	"encoding/csv"
 	"encoding/json"
 	"fmt"
-	"math"
 	"os"
 	"strconv"
 	"time"
@@ -44,7 +43,7 @@ func PrintStatistics(cmd *cobra.Command, stats types.Statistics) {
 			stat.Closed,
 			stat.Total,
 			fmt.Sprintf("%.2f%%", stat.OpenPercentage),
-			fmt.Sprintf("%.0f", math.Round((stat.AvgTimeToClose/(24*60*60))*100/100)),
+			fmt.Sprintf("%.0f", stat.AvgTimeToClose),
 			fmt.Sprintf("%.0f", stat.MedianTimeToClose),
 		})
 	}
@@ -57,7 +56,7 @@ func PrintStatistics(cmd *cobra.Command, stats types.Statistics) {
 		stats.OverallStats.Closed,
 		stats.OverallStats.Total,
 		fmt.Sprintf("%.2f%%", stats.OverallStats.OpenPercentage),
-		fmt.Sprintf("%.0f", math.Round((stats.OverallStats.AvgTimeToClose/(24*60*60))*100/100)),
+		fmt.Sprintf("%.0f", stats.OverallStats.AvgTimeToClose),
 		fmt.Sprintf("%.0f", stats.OverallStats.MedianTimeToClose),
 	})
 
@@ -118,7 +117,7 @@ func WriteDelimitedOutput(cmd *cobra.Command, stats types.Statistics, delimiter 
 			strconv.Itoa(stat.Closed),
 			strconv.Itoa(stat.Total),
 			fmt.Sprintf("%.2f", stat.OpenPercentage),
-			fmt.Sprintf("%.0f", math.Round((stat.AvgTimeToClose/(24*60*60))*100/100)),
+			fmt.Sprintf("%.0f", stat.AvgTimeToClose),
 			fmt.Sprintf("%.0f", stat.MedianTimeToClose),
 		}
 		if err := writer.Write(row); err != nil {
@@ -133,7 +132,7 @@ func WriteDelimitedOutput(cmd *cobra.Command, stats types.Statistics, delimiter 
 		strconv.Itoa(stats.OverallStats.Closed),
 		strconv.Itoa(stats.OverallStats.Total),
 		fmt.Sprintf("%.2f%%", stats.OverallStats.OpenPercentage),
-		fmt.Sprintf("%.0f", math.Round((stats.OverallStats.AvgTimeToClose/(24*60*60))*100/100)),
+		fmt.Sprintf("%.0f", stats.OverallStats.AvgTimeToClose),
 		fmt.Sprintf("%.0f", stats.OverallStats.MedianTimeToClose),
 	}
 	if err := writer.Write(totalRow); err != nil {
