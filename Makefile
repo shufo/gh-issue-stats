@@ -15,3 +15,5 @@ run:
 	@gh $(EXTENSION)
 install:
 	@gh extension install . --force
+test:
+	@go test ./...
