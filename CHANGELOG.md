@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.3.0](https://github.com/shufo/gh-issue-stats/compare/v0.2.1...v0.3.0) (2024-12-29)
+
+
+### Features
+
+* 🎸 accept 1st argument as repository name ([6526331](https://github.com/shufo/gh-issue-stats/commit/6526331805f578ba141929ee5abcb4d99c262cda))
+
+
+### Fixes
+
+* 🐛 invalid header row ([7dd13c0](https://github.com/shufo/gh-issue-stats/commit/7dd13c04be7525cc7d07131b1dec9e2fcb00aa27))
+* 🐛 output added stats to csv and tsv ([ab14529](https://github.com/shufo/gh-issue-stats/commit/ab14529d1d98827a5a849700fb9a077ae7b474f1))
+
 ## [0.2.1](https://github.com/shufo/gh-issue-stats/compare/v0.2.0...v0.2.1) (2024-12-28)
 
 
