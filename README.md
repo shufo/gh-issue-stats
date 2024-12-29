@@ -2,6 +2,8 @@
 
 A [`gh`](https://github.com/cli/cli) CLI extension that exports GitHub issue statistics (CSV, JSON, TSV)
 
+![Screencast](https://github.com/user-attachments/assets/27d4f6ba-1cfa-4c85-b9a8-3402248247b0)
+
 ## Installation
 
 ```bash
