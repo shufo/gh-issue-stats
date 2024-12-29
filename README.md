@@ -4,6 +4,8 @@
 
 A `gh` CLI extension that lets you export issue data various format (CSV, JSON, TSV).
 
+![Screencast](https://github.com/user-attachments/assets/27d4f6ba-1cfa-4c85-b9a8-3402248247b0)
+
 ## Installation
 
 ```bash
