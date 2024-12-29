@@ -2,7 +2,7 @@
 
 📊 Export GitHub issue statistics via the [GitHub CLI](https://github.com/cli/cli)
 
-A `gh` CLI extension that lets you export issue stats with various format (CSV, JSON, TSV).
+A `gh` CLI extension that lets you export issue stats aggregated by labels with various format (CSV, JSON, TSV).
 
 ![Screencast](https://github.com/user-attachments/assets/27d4f6ba-1cfa-4c85-b9a8-3402248247b0)
 
@@ -38,7 +38,19 @@ $ gh issue-stats owner/repo --format csv
 $ gh issue-stats owner/repo --format tsv
 ```
 
-- Debug
+- Persist aggregated results to file
+
+```bash
+$ gh issue-stats -s stats.json
+```
+
+- Persist raw source data to file
+
+```bash
+$ gh issue-stats -o issues.json
+```
+
+- Verbose output
 
 ```bash
 $ gh issue-stats --debug
