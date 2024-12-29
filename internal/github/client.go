@@ -23,21 +23,24 @@ func GetRepoInfo() (string, error) {
 	return stdOut.String()[:stdOut.Len()-1], nil
 }
 
-func FetchIssues() ([]types.Issue, error) {
+func FetchIssues(repository string) ([]types.Issue, error) {
 	client, err := api.DefaultRESTClient()
 	if err != nil {
 		return nil, fmt.Errorf("failed to create GitHub client: %v", err)
 	}
 
-	repo, err := GetRepoInfo()
-	if err != nil {
-		return nil, err
+	if repository == "" {
+		currentRepo, err := GetRepoInfo()
+		if err != nil {
+			return nil, fmt.Errorf("failed to get current repository: %w", err)
+		}
+		repository = currentRepo
 	}
 
 	// First, get the total count of issues to calculate pages
 	var totalCount int
 	// path := fmt.Sprintf("repos/%s/issues?state=all&per_page=1", repo)
-	path := fmt.Sprintf("search/issues?q=repo:%s", repo)
+	path := fmt.Sprintf("search/issues?q=repo:%s", repository)
 	response := struct {
 		TotalCount int `json:"total_count"`
 	}{}
@@ -70,7 +73,7 @@ func FetchIssues() ([]types.Issue, error) {
 		}
 
 		var pageIssues []types.Issue
-		path := fmt.Sprintf("repos/%s/issues?state=all&per_page=%d&page=%d", repo, perPage, page)
+		path := fmt.Sprintf("repos/%s/issues?state=all&per_page=%d&page=%d", repository, perPage, page)
 		err := client.Get(path, &pageIssues)
 		if err != nil {
 			utils.StopSpinner()

@@ -35,6 +35,7 @@ Examples:
 
   # With output format
   gh issue-stats owner/repo --format json`,
+		Args:          cobra.MaximumNArgs(1),
 		RunE:          runCommand,
 		SilenceErrors: true,
 		SilenceUsage:  true,
@@ -56,8 +57,16 @@ func runCommand(cmd *cobra.Command, args []string) error {
 	utils.SetDebug(debug)
 	github.SetDebug(debug)
 
+	var repository string
+	if len(args) > 0 {
+		repository = args[0]
+		// Validate repository format
+		if !isValidRepositoryFormat(repository) {
+			return fmt.Errorf("invalid repository format. Expected format: owner/repo")
+		}
+	}
 	// Fetch issues
-	issues, err := github.FetchIssues()
+	issues, err := github.FetchIssues(repository)
 	if err != nil {
 		return err
 	}
@@ -94,4 +103,10 @@ func runCommand(cmd *cobra.Command, args []string) error {
 	}
 
 	return nil
+}
+
+// isValidRepositoryFormat validates the repository argument format
+func isValidRepositoryFormat(repo string) bool {
+	parts := strings.Split(repo, "/")
+	return len(parts) == 2 && parts[0] != "" && parts[1] != ""
 }
