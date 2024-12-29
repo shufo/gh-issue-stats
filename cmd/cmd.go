@@ -3,7 +3,6 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"log/slog"
 	"os"
 	"strings"
 
@@ -18,7 +17,6 @@ var (
 	statsFile  string
 	format     string
 	debug      bool
-	logger     *slog.Logger
 )
 
 func Exec() {
