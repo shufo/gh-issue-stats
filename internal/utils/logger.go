@@ -2,21 +2,21 @@ package utils
 
 import (
 	"fmt"
-	"os"
 
+	"github.com/spf13/cobra"
 	"golang.org/x/exp/slog"
 )
 
 var logger *slog.Logger
 
-func SetupLogger(debug bool) {
+func SetupLogger(cmd *cobra.Command, debug bool) {
 	opts := &slog.HandlerOptions{}
 	if debug {
 		opts.Level = slog.LevelDebug
 	} else {
 		opts.Level = slog.LevelInfo
 	}
-	handler := slog.NewJSONHandler(os.Stderr, opts)
+	handler := slog.NewJSONHandler(cmd.OutOrStdout(), opts)
 	logger = slog.New(handler)
 }
 

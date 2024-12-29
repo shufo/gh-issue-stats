@@ -60,7 +60,7 @@ Examples:
 }
 
 func runCommand(cmd *cobra.Command, args []string) error {
-	utils.SetupLogger(debug)
+	utils.SetupLogger(cmd, debug)
 	utils.SetDebug(debug)
 	github.SetDebug(debug)
 
@@ -98,15 +98,15 @@ func runCommand(cmd *cobra.Command, args []string) error {
 	// Output based on format
 	switch strings.ToLower(format) {
 	case "json":
-		encoder := json.NewEncoder(os.Stdout)
+		encoder := json.NewEncoder(cmd.OutOrStdout())
 		encoder.SetIndent("", "  ")
 		return encoder.Encode(stats)
 	case "csv":
-		return utils.WriteDelimitedOutput(stats, ',')
+		return utils.WriteDelimitedOutput(cmd, stats, ',')
 	case "tsv":
-		return utils.WriteDelimitedOutput(stats, '\t')
+		return utils.WriteDelimitedOutput(cmd, stats, '\t')
 	default:
-		utils.PrintStatistics(stats)
+		utils.PrintStatistics(cmd, stats)
 	}
 
 	return nil

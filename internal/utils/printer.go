@@ -13,13 +13,14 @@ import (
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/jedib0t/go-pretty/v6/text"
 	"github.com/shufo/gh-issue-stats/pkg/types"
+	"github.com/spf13/cobra"
 )
 
 var header = []string{"Label", "Open", "Closed", "Total", "Open %", "Average Time to close (days)", "Median Time to close (days)"}
 
-func PrintStatistics(stats types.Statistics) {
+func PrintStatistics(cmd *cobra.Command, stats types.Statistics) {
 	t := table.NewWriter()
-	t.SetOutputMirror(os.Stdout)
+	t.SetOutputMirror(cmd.OutOrStdout())
 	t.SetStyle(table.StyleRounded)
 
 	// Configure table style
@@ -100,8 +101,8 @@ func SaveToFile(data interface{}, filename string) error {
 	return nil
 }
 
-func WriteDelimitedOutput(stats types.Statistics, delimiter rune) error {
-	writer := csv.NewWriter(os.Stdout)
+func WriteDelimitedOutput(cmd *cobra.Command, stats types.Statistics, delimiter rune) error {
+	writer := csv.NewWriter(cmd.OutOrStdout())
 	writer.Comma = delimiter
 
 	// Write header
