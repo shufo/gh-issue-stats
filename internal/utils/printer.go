@@ -29,7 +29,11 @@ func PrintStatistics(stats types.Statistics) {
 	t.Style().Options.SeparateRows = false
 
 	// Set header
-	t.AppendHeader(table.Row{header})
+	row := make(table.Row, len(header))
+	for i, v := range header {
+		row[i] = v
+	}
+	t.AppendHeader(row)
 
 	// Add label statistics rows
 	for _, stat := range stats.LabelStats {
