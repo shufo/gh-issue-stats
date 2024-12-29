@@ -29,7 +29,7 @@ func CalculateStatistics(issues []types.Issue) types.Statistics {
 	overallStats := types.OverallStats{}
 
 	// Calculate average close time per label
-	labelAvgCloseTime := make(map[string]float64)
+	labelAvgTimeToClose := make(map[string]float64)
 	labelCloseTimes := make(map[string][]float64)
 
 	var totalCloseTime float64
@@ -87,14 +87,14 @@ func CalculateStatistics(issues []types.Issue) types.Statistics {
 					allCloseTimes = append(allCloseTimes, closeTimeDays)
 					closedIssuesCount++
 					if len(issue.Labels) == 0 {
-						labelAvgCloseTime[types.UnlabeledLabel] += closeTime.Seconds()
+						labelAvgTimeToClose[types.UnlabeledLabel] += closeTime.Seconds()
 						labelCloseTimes[types.UnlabeledLabel] = append(
 							labelCloseTimes[types.UnlabeledLabel],
 							closeTimeDays,
 						)
 					} else {
 						for _, label := range issue.Labels {
-							labelAvgCloseTime[label.Name] += closeTime.Seconds()
+							labelAvgTimeToClose[label.Name] += closeTime.Seconds()
 							labelCloseTimes[label.Name] = append(
 								labelCloseTimes[label.Name],
 								closeTimeDays,
@@ -116,36 +116,36 @@ func CalculateStatistics(issues []types.Issue) types.Statistics {
 
 	// Calculate the average close time for each label
 	for i, stat := range labelStatsSlice {
-		totalLabelCloseTime := labelAvgCloseTime[stat.Name]
+		totalLabelCloseTime := labelAvgTimeToClose[stat.Name]
 
 		if stat.Total > 0 {
 			stat.OpenPercentage = float64(stat.Open) / float64(stat.Total) * 100
 		}
 
 		if stat.Closed > 0 {
-			stat.AvgCloseTime = totalLabelCloseTime / float64(stat.Closed)
-			stat.MedianCloseTime = calculateMedian(labelCloseTimes[stat.Name])
+			stat.AvgTimeToClose = totalLabelCloseTime / float64(stat.Closed)
+			stat.MedianTimeToClose = calculateMedian(labelCloseTimes[stat.Name])
 		}
 
 		labelStatsSlice[i] = stat
 	}
 
 	// Calculate the overall average close time
-	var overallAvgCloseTime, overallMedianCloseTime float64
+	var overallAvgTimeToClose, overallMedianTimeToClose float64
 	if closedIssuesCount > 0 {
-		overallAvgCloseTime = totalCloseTime / float64(closedIssuesCount)
-		overallMedianCloseTime = calculateMedian(allCloseTimes)
+		overallAvgTimeToClose = totalCloseTime / float64(closedIssuesCount)
+		overallMedianTimeToClose = calculateMedian(allCloseTimes)
 	}
 
 	return types.Statistics{
 		LabelStats: labelStatsSlice,
 		OverallStats: types.OverallStats{
-			Total:           overallStats.Total,
-			Open:            overallStats.Open,
-			OpenPercentage:  float64(overallStats.Open) / float64(overallStats.Total) * 100,
-			Closed:          overallStats.Closed,
-			AvgCloseTime:    overallAvgCloseTime,
-			MedianCloseTime: overallMedianCloseTime,
+			Total:             overallStats.Total,
+			Open:              overallStats.Open,
+			OpenPercentage:    float64(overallStats.Open) / float64(overallStats.Total) * 100,
+			Closed:            overallStats.Closed,
+			AvgTimeToClose:    overallAvgTimeToClose,
+			MedianTimeToClose: overallMedianTimeToClose,
 		},
 	}
 }

@@ -44,8 +44,8 @@ func PrintStatistics(cmd *cobra.Command, stats types.Statistics) {
 			stat.Closed,
 			stat.Total,
 			fmt.Sprintf("%.2f%%", stat.OpenPercentage),
-			fmt.Sprintf("%.0f", math.Round((stat.AvgCloseTime/(24*60*60))*100/100)),
-			fmt.Sprintf("%.0f", stat.MedianCloseTime),
+			fmt.Sprintf("%.0f", math.Round((stat.AvgTimeToClose/(24*60*60))*100/100)),
+			fmt.Sprintf("%.0f", stat.MedianTimeToClose),
 		})
 	}
 
@@ -57,8 +57,8 @@ func PrintStatistics(cmd *cobra.Command, stats types.Statistics) {
 		stats.OverallStats.Closed,
 		stats.OverallStats.Total,
 		fmt.Sprintf("%.2f%%", stats.OverallStats.OpenPercentage),
-		fmt.Sprintf("%.0f", math.Round((stats.OverallStats.AvgCloseTime/(24*60*60))*100/100)),
-		fmt.Sprintf("%.0f", stats.OverallStats.MedianCloseTime),
+		fmt.Sprintf("%.0f", math.Round((stats.OverallStats.AvgTimeToClose/(24*60*60))*100/100)),
+		fmt.Sprintf("%.0f", stats.OverallStats.MedianTimeToClose),
 	})
 
 	// Render the table
@@ -118,8 +118,8 @@ func WriteDelimitedOutput(cmd *cobra.Command, stats types.Statistics, delimiter 
 			strconv.Itoa(stat.Closed),
 			strconv.Itoa(stat.Total),
 			fmt.Sprintf("%.2f", stat.OpenPercentage),
-			fmt.Sprintf("%.0f", math.Round((stat.AvgCloseTime/(24*60*60))*100/100)),
-			fmt.Sprintf("%.0f", stat.MedianCloseTime),
+			fmt.Sprintf("%.0f", math.Round((stat.AvgTimeToClose/(24*60*60))*100/100)),
+			fmt.Sprintf("%.0f", stat.MedianTimeToClose),
 		}
 		if err := writer.Write(row); err != nil {
 			return fmt.Errorf("error writing row: %v", err)
@@ -133,8 +133,8 @@ func WriteDelimitedOutput(cmd *cobra.Command, stats types.Statistics, delimiter 
 		strconv.Itoa(stats.OverallStats.Closed),
 		strconv.Itoa(stats.OverallStats.Total),
 		fmt.Sprintf("%.2f%%", stats.OverallStats.OpenPercentage),
-		fmt.Sprintf("%.0f", math.Round((stats.OverallStats.AvgCloseTime/(24*60*60))*100/100)),
-		fmt.Sprintf("%.0f", stats.OverallStats.MedianCloseTime),
+		fmt.Sprintf("%.0f", math.Round((stats.OverallStats.AvgTimeToClose/(24*60*60))*100/100)),
+		fmt.Sprintf("%.0f", stats.OverallStats.MedianTimeToClose),
 	}
 	if err := writer.Write(totalRow); err != nil {
 		return fmt.Errorf("error writing total row: %v", err)

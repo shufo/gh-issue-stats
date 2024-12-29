@@ -32,23 +32,23 @@ const UnlabeledLabel = "*unlabeled*"
 
 // LabelStat stores statistics for a specific label
 type LabelStat struct {
-	Name            string  `json:"name"`
-	Open            int     `json:"open"`
-	Closed          int     `json:"closed"`
-	Total           int     `json:"total"`
-	OpenPercentage  float64 `json:"openPercentage"`
-	AvgCloseTime    float64 `json:"avgCloseTime"`
-	MedianCloseTime float64 `json:"medianCloseTime"`
+	Name              string  `json:"name"`
+	Open              int     `json:"open"`
+	Closed            int     `json:"closed"`
+	Total             int     `json:"total"`
+	OpenPercentage    float64 `json:"openPercentage"`
+	AvgTimeToClose    float64 `json:"AvgTimeToClose"`
+	MedianTimeToClose float64 `json:"MedianTimeToClose"`
 }
 
 // OverallStats stores the overall issue statistics
 type OverallStats struct {
-	Total           int     `json:"total"`
-	Open            int     `json:"open"`
-	Closed          int     `json:"closed"`
-	OpenPercentage  float64 `json:"openPercentage"`
-	AvgCloseTime    float64 `json:"avgCloseTime"`
-	MedianCloseTime float64 `json:"medianCloseTime"`
+	Total             int     `json:"total"`
+	Open              int     `json:"open"`
+	Closed            int     `json:"closed"`
+	OpenPercentage    float64 `json:"openPercentage"`
+	AvgTimeToClose    float64 `json:"AvgTimeToClose"`
+	MedianTimeToClose float64 `json:"MedianTimeToClose"`
 }
 
 // Statistics combines both label and overall statistics
