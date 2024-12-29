@@ -21,7 +21,7 @@ jobs:
       - name: Unshallow
         if: ${{ steps.release.outputs.release_created }}
         run: git fetch --prune --unshallow
-      - name: Run GoReleaser
+      - name: Run release step
         if: ${{ steps.release.outputs.release_created }}
         uses: cli/gh-extension-precompile@v2
         with:
