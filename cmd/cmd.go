@@ -17,6 +17,8 @@ var (
 	statsFile  string
 	format     string
 	debug      bool
+
+	Version = "dev"
 )
 
 func Exec() {
@@ -39,12 +41,17 @@ Examples:
 		RunE:          runCommand,
 		SilenceErrors: true,
 		SilenceUsage:  true,
+		Version:       getVersion(),
 	}
 
 	rootCmd.Flags().StringVarP(&outputFile, "output", "o", "", "Output file for raw issues data (optional)")
 	rootCmd.Flags().StringVarP(&statsFile, "stats", "s", "", "Output file for statistics data (optional)")
 	rootCmd.Flags().StringVarP(&format, "format", "f", "", "Output format: table (default), json, csv, or tsv")
 	rootCmd.Flags().BoolVarP(&debug, "debug", "v", false, "Enable verbose debug output")
+
+	// Customize version template
+	rootCmd.SetVersionTemplate(`gh-issue-stats {{printf "version: %s" .Version}}
+`)
 
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
@@ -109,4 +116,9 @@ func runCommand(cmd *cobra.Command, args []string) error {
 func isValidRepositoryFormat(repo string) bool {
 	parts := strings.Split(repo, "/")
 	return len(parts) == 2 && parts[0] != "" && parts[1] != ""
+}
+
+// getVersion returns the version string
+func getVersion() string {
+	return Version
 }
