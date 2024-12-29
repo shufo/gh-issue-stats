@@ -23,7 +23,11 @@ func GetRepoInfo() (string, error) {
 	return stdOut.String()[:stdOut.Len()-1], nil
 }
 
-func FetchIssues(repository string) ([]types.Issue, error) {
+// FetchIssuesFunc is a function type for fetching issues
+type FetchIssuesFunc func(string) ([]types.Issue, error)
+
+// DefaultFetchIssues is the actual implementation
+func DefaultFetchIssues(repository string) ([]types.Issue, error) {
 	client, err := api.DefaultRESTClient()
 	if err != nil {
 		return nil, fmt.Errorf("failed to create GitHub client: %v", err)
@@ -103,4 +107,19 @@ func FetchIssues(repository string) ([]types.Issue, error) {
 
 	utils.DebugPrintf("finished fetching issues (total: %d)", len(allIssues))
 	return allIssues, nil
+}
+
+// fetchIssues is the package variable that can be swapped in tests
+var fetchIssues FetchIssuesFunc = DefaultFetchIssues
+
+// FetchIssues is the public function that uses the variable
+func FetchIssues(repository string) ([]types.Issue, error) {
+	return fetchIssues(repository)
+}
+
+// SetFetchIssuesFunc allows replacing the fetch function for testing
+func SetFetchIssuesFunc(f FetchIssuesFunc) FetchIssuesFunc {
+	old := fetchIssues
+	fetchIssues = f
+	return old
 }
