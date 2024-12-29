@@ -21,10 +21,20 @@ var (
 
 func Exec() {
 	rootCmd := &cobra.Command{
-		Use:   "gh issue-stats",
+		Use:   "gh issue-stats [repository]",
 		Short: "Generate GitHub issue statistics",
 		Long: `A GitHub CLI extension to analyze repository issues and generate statistics.
-Provides detailed information about issues grouped by labels and overall statistics.`,
+Provides detailed information about issues grouped by labels and overall statistics.
+
+Examples:
+  # Current repository
+  gh issue-stats
+
+  # Specific repository
+  gh issue-stats owner/repo
+
+  # With output format
+  gh issue-stats owner/repo --format json`,
 		RunE:          runCommand,
 		SilenceErrors: true,
 		SilenceUsage:  true,
