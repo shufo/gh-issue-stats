@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.4.0](https://github.com/shufo/gh-issue-stats/compare/v0.3.0...v0.4.0) (2024-12-29)
+
+
+### Features
+
+* 🎸 add `--version` option ([b61a9b6](https://github.com/shufo/gh-issue-stats/commit/b61a9b6d80232a6600b8616136edfa280dbe56d6))
+
+
+### Fixes
+
+* 🐛 write output via cobra interface ([a363594](https://github.com/shufo/gh-issue-stats/commit/a36359492ea8943eb1137134257184b26fda1ab4))
+* **deps:** update module github.com/cli/go-gh to v2 ([0a3bfbb](https://github.com/shufo/gh-issue-stats/commit/0a3bfbbfbdf2606f7ee8ae72911d64bc2bdc9c80))
+
+
+### Miscellaneous
+
+* 🤖 add go-task manifest ([6516f3e](https://github.com/shufo/gh-issue-stats/commit/6516f3e822b5e9436ff3bcbbeaa571e62c0c61d6))
+* 🤖 add ignore pattern ([b537318](https://github.com/shufo/gh-issue-stats/commit/b537318c25a075bb8fcc6a04de915facec1b235c))
+* 🤖 add test command to Makefile ([a1fb511](https://github.com/shufo/gh-issue-stats/commit/a1fb511245ee02c38d599976b4407337114d5319))
+* 🤖 add testify for testing ([c474ba1](https://github.com/shufo/gh-issue-stats/commit/c474ba10d341b0b909500894dcdc75adf3e1ed25))
+* 🤖 inject version flag on local build ([0a47dce](https://github.com/shufo/gh-issue-stats/commit/0a47dce5934f9399a2f20da8c7c93a6f320ef287))
+
 ## [0.3.0](https://github.com/shufo/gh-issue-stats/compare/v0.2.1...v0.3.0) (2024-12-29)
 
 
