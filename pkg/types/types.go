@@ -37,8 +37,8 @@ type LabelStat struct {
 	Closed            int     `json:"closed"`
 	Total             int     `json:"total"`
 	OpenPercentage    float64 `json:"openPercentage"`
-	AvgTimeToClose    float64 `json:"AvgTimeToClose"`
-	MedianTimeToClose float64 `json:"MedianTimeToClose"`
+	AvgDaysToClose    float64 `json:"AvgDaysToClose"`
+	MedianDaysToClose float64 `json:"MedianDaysToClose"`
 }
 
 // OverallStats stores the overall issue statistics
@@ -47,8 +47,8 @@ type OverallStats struct {
 	Open              int     `json:"open"`
 	Closed            int     `json:"closed"`
 	OpenPercentage    float64 `json:"openPercentage"`
-	AvgTimeToClose    float64 `json:"AvgTimeToClose"`
-	MedianTimeToClose float64 `json:"MedianTimeToClose"`
+	AvgDaysToClose    float64 `json:"AvgDaysToClose"`
+	MedianDaysToClose float64 `json:"MedianDaysToClose"`
 }
 
 // Statistics combines both label and overall statistics

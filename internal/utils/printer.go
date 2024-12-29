@@ -43,8 +43,8 @@ func PrintStatistics(cmd *cobra.Command, stats types.Statistics) {
 			stat.Closed,
 			stat.Total,
 			fmt.Sprintf("%.2f%%", stat.OpenPercentage),
-			fmt.Sprintf("%.0f", stat.AvgTimeToClose),
-			fmt.Sprintf("%.0f", stat.MedianTimeToClose),
+			fmt.Sprintf("%.0f", stat.AvgDaysToClose),
+			fmt.Sprintf("%.0f", stat.MedianDaysToClose),
 		})
 	}
 
@@ -56,8 +56,8 @@ func PrintStatistics(cmd *cobra.Command, stats types.Statistics) {
 		stats.OverallStats.Closed,
 		stats.OverallStats.Total,
 		fmt.Sprintf("%.2f%%", stats.OverallStats.OpenPercentage),
-		fmt.Sprintf("%.0f", stats.OverallStats.AvgTimeToClose),
-		fmt.Sprintf("%.0f", stats.OverallStats.MedianTimeToClose),
+		fmt.Sprintf("%.0f", stats.OverallStats.AvgDaysToClose),
+		fmt.Sprintf("%.0f", stats.OverallStats.MedianDaysToClose),
 	})
 
 	// Render the table
@@ -117,8 +117,8 @@ func WriteDelimitedOutput(cmd *cobra.Command, stats types.Statistics, delimiter 
 			strconv.Itoa(stat.Closed),
 			strconv.Itoa(stat.Total),
 			fmt.Sprintf("%.2f", stat.OpenPercentage),
-			fmt.Sprintf("%.0f", stat.AvgTimeToClose),
-			fmt.Sprintf("%.0f", stat.MedianTimeToClose),
+			fmt.Sprintf("%.0f", stat.AvgDaysToClose),
+			fmt.Sprintf("%.0f", stat.MedianDaysToClose),
 		}
 		if err := writer.Write(row); err != nil {
 			return fmt.Errorf("error writing row: %v", err)
@@ -132,8 +132,8 @@ func WriteDelimitedOutput(cmd *cobra.Command, stats types.Statistics, delimiter 
 		strconv.Itoa(stats.OverallStats.Closed),
 		strconv.Itoa(stats.OverallStats.Total),
 		fmt.Sprintf("%.2f%%", stats.OverallStats.OpenPercentage),
-		fmt.Sprintf("%.0f", stats.OverallStats.AvgTimeToClose),
-		fmt.Sprintf("%.0f", stats.OverallStats.MedianTimeToClose),
+		fmt.Sprintf("%.0f", stats.OverallStats.AvgDaysToClose),
+		fmt.Sprintf("%.0f", stats.OverallStats.MedianDaysToClose),
 	}
 	if err := writer.Write(totalRow); err != nil {
 		return fmt.Errorf("error writing total row: %v", err)
