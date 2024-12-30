@@ -107,10 +107,60 @@ $ gh issue-stats owner/repo
 
 - Change output format. (default: table. Supports `json`, `csv` and `tsv`)
 
-```bash
+`json`
+
+```json
 $ gh issue-stats --format json
+{
+  "labelStats": [
+    {
+      "name": "*unlabeled*",
+      "open": 2,
+      "closed": 44,
+      "total": 46,
+      "openPercentage": 4.3478260869565215,
+      "AvgDaysToClose": 96.2777543665825,
+      "MedianDaysToClose": 14.300063657407408
+    },
+    {
+      "name": "bug",
+      "open": 4,
+      "closed": 33,
+      "total": 37,
+      "openPercentage": 10.81081081081081,
+      "AvgDaysToClose": 101.47039071268236,
+      "MedianDaysToClose": 75.71487268518518
+    }
+  ],
+  "overallStats": {
+    "total": 83,
+    "open": 6,
+    "closed": 77,
+    "openPercentage": 7.228915662650602,
+    "AvgDaysToClose": 98.50316994348243,
+    "MedianDaysToClose": 70.53833333333334
+  }
+}
+```
+
+`csv`
+
+```bash
 $ gh issue-stats owner/repo --format csv
+Label,Open,Closed,Total,Open %,Average Time to close (days),Median Time to close (days)
+*unlabeled*,2,44,46,4.35,96,14
+bug,4,33,37,10.81,101,76
+Total,6,77,83,7.23%,99,71
+```
+
+`tsv`
+
+```bash
 $ gh issue-stats owner/repo --format tsv
+Label   Open    Closed  Total   Open %  Average Time to close (days)    Median Time to close (days)
+*unlabeled*     2       44      46      4.35    96      14
+bug     4       33      37      10.81   101     76
+Total   6       77      83      7.23%   99      71
 ```
 
 - Persist aggregated results to file
