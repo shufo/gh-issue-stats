@@ -18,9 +18,9 @@ $ gh extension install shufo/gh-issue-stats
 
 ## Output Example
 
-Stats from GitHub CLI (`cli/cli`)
+Stats from [GitHub CLI](https://github.com/cli/cli) (`cli/cli`) issues.
 
-```
+```bash
 $ gh issue-stats cli/cli
 ╭─────────────────────┬──────┬────────┬───────┬─────────┬──────────────────────────────┬─────────────────────────────╮
 │ Label               │ Open │ Closed │ Total │ Open %  │ Average Time To Close (Days) │ Median Time To Close (Days) │
@@ -90,7 +90,7 @@ $ gh issue-stats cli/cli
 │ Total               │  691 │   3812 │  4503 │ 15.35%  │ 56                           │ 2                           │
 ╰─────────────────────┴──────┴────────┴───────┴─────────┴──────────────────────────────┴─────────────────────────────╯
 ```
-
+ 
 ## Usage
 
 - Basic usage
