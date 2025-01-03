@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/shufo/gh-issue-stats/compare/v0.4.0...v0.4.1) (2025-01-03)
+
+
+### Fixes
+
+* **deps:** update golang.org/x/exp digest to 7d7fa50 ([c163900](https://github.com/shufo/gh-issue-stats/commit/c1639007f6f80bdace19dcbc9bccfb12c7d66726))
+
 ## [0.4.0](https://github.com/shufo/gh-issue-stats/compare/v0.3.0...v0.4.0) (2024-12-29)
 
 
