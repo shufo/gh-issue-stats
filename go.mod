@@ -1,8 +1,8 @@
 module github.com/shufo/gh-issue-stats
 
-go 1.23.2
+go 1.25.0
 
-require github.com/cli/go-gh/v2 v2.11.1
+require github.com/cli/go-gh/v2 v2.13.0
 
 require (
 	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2 // indirect
@@ -30,16 +30,16 @@ require (
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
-	github.com/mattn/go-runewidth v0.0.15 // indirect
-	github.com/muesli/termenv v0.15.2 // indirect
+	github.com/mattn/go-runewidth v0.0.16 // indirect
+	github.com/muesli/termenv v0.16.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/spf13/cobra v1.8.1
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stretchr/testify v1.10.0
 	github.com/thlib/go-timezone-local v0.0.0-20210907160436-ef149e42d28e // indirect
 	golang.org/x/exp v0.0.0-20250103183323-7d7fa50e5329
-	golang.org/x/sys v0.19.0 // indirect
-	golang.org/x/term v0.17.0 // indirect
-	golang.org/x/text v0.21.0 // indirect
+	golang.org/x/sys v0.31.0 // indirect
+	golang.org/x/term v0.30.0 // indirect
+	golang.org/x/text v0.23.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
